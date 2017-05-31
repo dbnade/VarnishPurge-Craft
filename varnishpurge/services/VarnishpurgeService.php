@@ -28,7 +28,7 @@ class VarnishpurgeService extends BaseApplicationComponent
             // May not be the case if other thirdparty plugins sends elements.
             $locale = $elements[0]->locale;
 
-            $uris = array();
+            $uris = array('__home__');
 
             foreach ($elements as $element) {
                 $uris = array_merge($uris, $this->_getElementUris($element, $locale, $purgeRelated));
