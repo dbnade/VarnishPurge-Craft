@@ -69,6 +69,15 @@ class VarnishpurgeService extends BaseApplicationComponent
             }
         }
 
+        // get directly related categories
+        $relatedCategories = $this->_getRelatedElementsOfType($element, $locale, ElementType::Category);
+        foreach ($relatedCategories as $related) {
+            if ($related->uri != '') {
+                $uris[] = $related->uri;
+            }
+        }
+        unset($relatedCategories);
+
         // Get related elements and their uris
         if ($getRelated) {
 
@@ -80,15 +89,6 @@ class VarnishpurgeService extends BaseApplicationComponent
                 }
             }
             unset($relatedEntries);
-
-            // get directly related categories
-            $relatedCategories = $this->_getRelatedElementsOfType($element, $locale, ElementType::Category);
-            foreach ($relatedCategories as $related) {
-                if ($related->uri != '') {
-                    $uris[] = $related->uri;
-                }
-            }
-            unset($relatedCategories);
 
             // get directly related matrix block and its owners uri
             $relatedMatrixes = $this->_getRelatedElementsOfType($element, $locale, ElementType::MatrixBlock);
